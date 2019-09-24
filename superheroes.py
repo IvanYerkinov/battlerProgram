@@ -28,10 +28,15 @@ class Hero:
         self.current_hp = 100
 
     def add_ability(self, ability):
-        pass
+        self.abilities.append(ability)
 
     def attack(self):
-        pass
+        atkdmg = 0
+
+        for ab in self.abilities:
+            atkdmg += ab.attack()
+
+        return atkdmg
 
     def defend(self, inc_dmg):
         pass
@@ -56,3 +61,6 @@ if __name__ == "__main__":
 
     print(hero.name)
     print(hero.current_hp)
+
+    hero.add_ability(ability)
+    print(hero.attack())
