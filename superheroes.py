@@ -30,6 +30,9 @@ class Hero:
     def add_ability(self, ability):
         self.abilities.append(ability)
 
+    def add_armor(self, armor):
+        self.armors.append(armor)
+
     def attack(self):
         atkdmg = 0
 
@@ -39,7 +42,20 @@ class Hero:
         return atkdmg
 
     def defend(self, inc_dmg):
-        pass
+        defdmg = 0
+
+        for ar in self.armors:
+            defdmg += ar.block()
+
+        return defdmg
+
+    def take_damage(self, damage):
+        dmg = damage - self.defend(damage)
+
+        if(dmg <= 0):
+            dmg = 1
+
+        self.current_hp -= dmg
 
     def is_alive(self):
         pass
@@ -64,3 +80,8 @@ if __name__ == "__main__":
 
     hero.add_ability(ability)
     print(hero.attack())
+
+    hero.add_armor(armor)
+
+    hero.take_damage(50)
+    print(hero.current_hp)
