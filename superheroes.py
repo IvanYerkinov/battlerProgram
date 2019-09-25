@@ -24,8 +24,8 @@ class Hero:
         self.abilities = []
         self.armors = []
         self.name = name
-        self.starting_hp = 100
-        self.current_hp = 100
+        self.starting_hp = starting_health
+        self.current_hp = starting_health
 
     def add_ability(self, ability):
         self.abilities.append(ability)
@@ -58,10 +58,20 @@ class Hero:
         self.current_hp -= dmg
 
     def is_alive(self):
-        pass
+        if self.current_hp <= 0:
+            return False
+        return True
 
     def fight(self, opp):
-        pass
+        while True:
+            opp.take_damage(self.attack())
+            if opp.is_alive() is False:
+                print(self.name + " won!")
+                return
+            self.take_damage(opp.attack())
+            if self.is_alive() is False:
+                print(opp.name + " won!")
+                return
 
 
 if __name__ == "__main__":
@@ -69,19 +79,8 @@ if __name__ == "__main__":
     armor = Armor("Debug Armor", 20)
     hero = Hero("Test")
 
-    print(ability.name)
-    print(ability.attack())
+    ability2 = Ability("Ability2", 20)
+    armor2 = Armor("Armor2", 20)
+    hero2 = Hero("Test2")
 
-    print(armor.name)
-    print(armor.block())
-
-    print(hero.name)
-    print(hero.current_hp)
-
-    hero.add_ability(ability)
-    print(hero.attack())
-
-    hero.add_armor(armor)
-
-    hero.take_damage(50)
-    print(hero.current_hp)
+    hero.fight(hero2)
