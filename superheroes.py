@@ -259,13 +259,13 @@ class Arena:
         self.team_two.stats()
 
 
-f __name__ == "__main__":
+if __name__ == "__main__":
     game_is_running = True
 
     # Instantiate Game Arena
     arena = Arena()
 
-    #Build Teams
+    # Build Teams
     arena.build_team_one()
     arena.build_team_two()
 
@@ -275,11 +275,11 @@ f __name__ == "__main__":
         arena.show_stats()
         play_again = input("Play Again? Y or N: ")
 
-        #Check for Player Input
+        # Check for Player Input
         if play_again.lower() == "n":
             game_is_running = False
 
         else:
-            #Revive heroes to play again
+            # Revive heroes to play again
             arena.team_one.revive_heroes()
             arena.team_two.revive_heroes()
